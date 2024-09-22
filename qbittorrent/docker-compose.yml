@@ -1,0 +1,22 @@
+services:
+  qbittorrent-nox:
+    container_name: qbittorrent
+    restart: unless-stopped
+    environment:
+      - QBT_EULA=accept
+      - QBT_VERSION=latest
+      - QBT_WEBUI_PORT=8888
+      - TZ=America/Managua
+    image: qbittorrentofficial/qbittorrent-nox:latest
+    ports:
+      - 6881:6881/tcp
+      - 6881:6881/udp
+      - 8888:8888/tcp
+    read_only: true
+    stop_grace_period: 30m
+    tmpfs:
+      - /tmp
+    tty: true
+    volumes:
+      - ./config:/config
+      - ./downloads:/downloads
